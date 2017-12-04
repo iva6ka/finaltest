@@ -16,6 +16,7 @@ import java.net.URL;
 public class MyStepdefs {
 
     AndroidDriver driver;
+    String actionType = "touch";
 
     @cucumber.api.java.Before
     public void launch () throws MalformedURLException {
@@ -33,8 +34,8 @@ public class MyStepdefs {
 
     @Given("^Open the app$")
     public void openTheApp() throws Exception {
-       String testbox = driver.findElement(By.xpath("(//*[@class='android.widget.LinearLayout' and ./parent::*[@id='fragment_container']]/*[@class='android.widget.TextView'])[2]")).getText();
-       Assert.assertEquals("Assert textboxsame aster reload after reload", "test" , testbox);
+       Boolean buttonState = getElementState("//*[@id='start_activation']");
+        Assert.assertEquals("Assert textboxsame aster reload after reload", false , buttonState);
 
        //Assert.assertEquals("text", testbox);
 
@@ -43,6 +44,8 @@ public class MyStepdefs {
     @When("^Click on btn$")
     public void clickOnBtn() throws Exception {
         driver.findElement(By.xpath("//*[@id='continue_button']")).click();
+        getElementText(12);
+        getElementText("as");
 
     }
 
@@ -50,4 +53,31 @@ public class MyStepdefs {
     public void clickNext() {
         driver.findElement(By.xpath("//*[@id='text_input']")).sendKeys("09125600511");
     }
+
+    public Boolean getElementState(String elemntXPath){
+     Boolean buttonState = driver.findElement(By.xpath(elemntXPath)).isEnabled();
+
+     return buttonState;
+    }
+
+    public String getElementText(String elementXpath) {
+                /*
+                 */
+        return null;
+    }
+
+    public String getElementText(String ID, String is2){
+
+        return null;
+    }
+
+    public Boolean isTouchDevice(String deviceName){
+        Boolean isDeviceTouch = true;
+        return isDeviceTouch;
+    }
+
+    public void setDeviceActionType(final Boolean isDeviceTouch){
+        Runnable sleepingRunner = () -> {isDeviceTouch = "touch"; isDeviceTouch = "click"; };
+    }
+
 }
